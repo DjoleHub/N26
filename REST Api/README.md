@@ -14,3 +14,5 @@ Tested creating new Product
 
 Automated tests are used to check if the API is responding properly and fast enough with correct response format. Postman runner can be configured to run as many iterrations of these steps as needed to verify the perofmrnace of the API.
 
+Please note that for the for this challenge i decided to hard code the JSON schema within the test itself, to make it easier. JSON schema can be used as part of the environment and then called each time it is required for the test.
+
