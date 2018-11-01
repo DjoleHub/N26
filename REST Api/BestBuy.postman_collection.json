@@ -1,0 +1,360 @@
+{
+	"info": {
+		"_postman_id": "74e75a2b-77f7-4d63-a7cf-892c8576a17b",
+		"name": "BestBuy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4dcbcb43-bd8e-4145-9263-f08d4a90b1bc",
+						"exec": [
+							"// Check if status code is 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Check if response time is less than 400ms",
+							"pm.test(\"Response time is less than 400ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);",
+							"});",
+							"",
+							"// Check if any category is returned",
+							"var product = JSON.parse(responseBody);",
+							"tests[\"At least one product is returned\"] = product.total > 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3030/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categories",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "17217f16-f94a-4af2-9cde-496176e94186",
+						"exec": [
+							"// Check if status code is 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Check if response time is less than 400ms",
+							"pm.test(\"Response time is less than 400ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);",
+							"});",
+							"",
+							"// Check if any category is returned",
+							"var category = JSON.parse(responseBody);",
+							"tests[\"At least one category is returned\"] = category.total > 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3030/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stores",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cd33eb8c-8c87-4347-b9e9-7a0231507e2d",
+						"exec": [
+							"// Check if status code is 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Check if response time is less than 400ms",
+							"pm.test(\"Response time is less than 400ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);",
+							"});",
+							"",
+							"// Check if any store is returned",
+							"var store = JSON.parse(responseBody);",
+							"tests[\"At least one store is returned\"] = store.total > 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3030/stores",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"stores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Services",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3e9d9754-9244-4a10-b7e0-8fe0695e236d",
+						"exec": [
+							"// Check if status code is 200 ",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Check if post response time is less than 400ms",
+							"pm.test(\"Response time is less than 400ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);",
+							"});",
+							"",
+							"// Check if any service is returned",
+							"var services = JSON.parse(responseBody);",
+							"tests[\"At least one service is returned\"] = services.total > 0;",
+							"",
+							"",
+							"// Define the JSON Schema",
+							"const serviceSchema = {",
+							"  \"properties\": {",
+							"    \"id\": {",
+							"      \"type\": \"integer\",",
+							"      \"minimum\": 100,",
+							"      \"maximum\": 1000",
+							"    },",
+							"    \"name\": {",
+							"      \"type\": \"string\",",
+							"      \"minLength\": 1,",
+							"      \"maxLength\": 25",
+							"    },",
+							"      \"createdAt\": {",
+							"      \"type\": \"string\",",
+							"      \"minLength\": 1,",
+							"      \"maxLength\": 25",
+							"    },",
+							"      \"updatedAt\": {",
+							"      \"type\": \"string\",",
+							"      \"minLength\": 1,",
+							"      \"maxLength\": 25",
+							"    }",
+							"  }",
+							"};",
+							"",
+							"// Test whether the response matches the schema",
+							"var service = JSON.parse(responseBody);",
+							"tests[\"Customer is valid\"] = tv4.validate(service, serviceSchema);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3030/services",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"services"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3030/categories",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ff063369-09c4-4be7-8007-fd9896108990",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "2c450dca-bb75-41f4-9aaa-79077298aa7f",
+						"exec": [
+							"// Check if post request was successful",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"});",
+							"",
+							"// Check if response time is less than 200ms",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"// Check if status code is 201",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "name",
+						"value": "name",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "id",
+						"value": "asasa",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"{{$guid}}\",\n  \"id\": \"{{$randomInt}}\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3030/products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "93786bb3-96d8-40b0-9780-91973043f90a",
+						"exec": [
+							"// Check if post request was successful",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"});",
+							"",
+							"// Check if response time is less than 200ms",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"// Check if status code is 201",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Apple Watch Series 4\",\n  \"type\": \"Watch\",\n  \"price\": 460,\n  \"shipping\": 0,\n  \"upc\": \"{{$randomInt}}\",\n  \"description\": \"Smart watch designed by Apple\",\n  \"manufacturer\": \"Apple\",\n  \"model\": \"Series 4\",\n  \"url\": \"www.apple.com\",\n  \"image\": \"/images/applewatch.png\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
